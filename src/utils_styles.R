@@ -25,14 +25,14 @@ app_custom_theme_title <- function(text){
     )
 }
 
-themes_li <- list(
-  "Cerulean" = (bs_theme(version = 5, bootswatch = "cerulean", primary = "#aabbcc", secondary = "#aabbcc")),
-  "Zephyr" = (bs_theme(version = 5, bootswatch = "zephyr", primary = "#aabbcc", secondary = "#ccddee")),
-  "Flatly" = (bs_theme(version = 5, bootswatch = "flatly", primary = "#aabbcc", secondary = "#ccddee")),
-  "Morph"  = (bs_theme(version = 5, bootswatch = "morph", primary = "#aabbcc", secondary = "#ccddee"))
-)
-
-# Precompile
-invisible(lapply(themes_li, bs_theme_dependencies))
+# themes_li <- list(
+#   "Cerulean" = (bs_theme(version = 5, bootswatch = "cerulean", primary = "#aabbcc", secondary = "#aabbcc")),
+#   "Zephyr" = (bs_theme(version = 5, bootswatch = "zephyr", primary = "#aabbcc", secondary = "#ccddee")),
+#   "Flatly" = (bs_theme(version = 5, bootswatch = "flatly", primary = "#aabbcc", secondary = "#ccddee")),
+#   "Morph"  = (bs_theme(version = 5, bootswatch = "morph", primary = "#aabbcc", secondary = "#ccddee"))
+# )
+# 
+# # Precompile
+# invisible(lapply(themes_li, bs_theme_dependencies))
 
 

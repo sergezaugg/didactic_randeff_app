@@ -15,6 +15,8 @@ source("src/utils_styles.R")
 ui <- page_navbar(
   title = "Random Effects Playground",
   
+  app_custom_footer(text = "v0.0.0-β - © 2026 Serge Zaugg"),
+  
 
   # CSS
   header = includeCSS("styles/styles.css"),
@@ -41,41 +43,43 @@ ui <- page_navbar(
           col_widths = c(4, 4, 4),
           # Column 1
           div(
-            numericInput("mu_a", "Mean A", 4),
-            numericInput("n_between_a", "N Clusters A", 10, min = 1),
+            # numericInput("mu_a", "Mean A", 4),
+            sliderInput("mu_a","Mean A",min = 0,max = 10,value = 4,step = 0.1),
+            numericInput("n_between_a", "N Clusters A", 5, min = 1),
           ),
           # Column 2
           div(
-            numericInput("mu_b", "Mean B", 5),
-            numericInput("n_between_b", "N Clusters B", 7, min = 1),
+            # numericInput("mu_b", "Mean B", 5),
+            sliderInput("mu_b","Mean B",min = 0,max = 10,value = 4.5,step = 0.1),
+            numericInput("n_between_b", "N Clusters B", 5, min = 1),
           ),
           # Column 3
           div(
-            numericInput("sd_between", "SD clusters", 0.1, min = 0),
-            numericInput("sd_within", "SD residual", 0.5, min = 0),
+            numericInput("sd_between", "SD clusters", 0.3, min = 0.1, max = 2, step = 0.1),
+            numericInput("sd_within", "SD residual", 0.3, min = 0.1,  max = 2, step = 0.1),
             numericInput("n_within", "N per cluster", 5, min = 1)
           )
         )
       ),
-      card(
-        card_header("LME estimates"),
+      card( 
+        card_header("LME estimates (accounts for clusters)"),
         layout_columns(
-          value_box(title = "Mean effect", value = textOutput("effect_mean"), height = "70px"),
-          value_box(title = "SE effect", value = textOutput("effect_std"), height = "70px"),
+          value_box(title = "Mean effect", value = uiOutput("effect_mean"), height = "60px", theme = "primary", class = "center-value" ),
+          value_box(title = "SD between", value = uiOutput("sd_between"), height = "60px", theme = "primary", class = "center-value"),
           col_widths = c(6, 6)
         ),
         layout_columns(
-          value_box(title = "SD between", value = textOutput("sd_between"), height = "70px"),
-          value_box(title = "SD residuals", value = textOutput("sd_resid"), height = "70px"),
+          value_box(title = "95% CI",      value = uiOutput("effect_std"),  height = "60px", theme = "primary", class = "center-value"),
+          value_box(title = "SD residuals", value = uiOutput("sd_resid"), height = "60px", theme = "primary", class = "center-value"),
           col_widths = c(6, 6)
         ),
         layout_columns(
-          value_box(title = "P-value effect", value = textOutput("effect_pval"), height = "70px"),
+          value_box(title = "P-value effect", value = uiOutput("effect_pval"), height = "60px", theme = "primary", class = "center-value"),
           col_widths = c(6, 6)
         )
       ),
       card(
-        card_header("Panel 2"),
+        card_header("Panel xx"),
         plotOutput("plot2")
       )
     ),
@@ -90,7 +94,7 @@ ui <- page_navbar(
         plotOutput("plot4")
       ),
       card(
-        card_header("Panel 2"),
+        card_header("Panel yy"),
         plotOutput("plot2")
       )
     )
@@ -162,24 +166,36 @@ server <- function(input, output, session) {
   })
 
 
-  output$sd_between <- renderText({
-    round(lme_summa()$sd_between, 2)
+  output$sd_between <- renderUI({
+    tags$span(
+      sprintf("%.2f", lme_summa()$sd_between),
+    )
   })
 
-  output$sd_resid <- renderText({
-    round(lme_summa()$sd_resid, 2)
+  output$sd_resid <- renderUI({
+    tags$span(
+      sprintf("%.2f", lme_summa()$sd_resid),
+    )
   })
 
-  output$effect_mean <- renderText({
-    round(lme_summa()$effect_mean, 2)
+  output$effect_mean <- renderUI({
+    tags$span(
+      sprintf("%.2f", lme_summa()$effect_mean),
+    )
   })
 
-  output$effect_std <- renderText({
-    round(lme_summa()$effect_std, 2)
+  output$effect_std <- renderUI({
+    tags$span(
+      sprintf("(%.2f to %.2f)",
+        lme_summa()$effect_ci_lo,
+        lme_summa()$effect_ci_up),
+    )
   })
-
-  output$effect_pval <- renderText({
-    round(lme_summa()$effect_pval, 2)
+  
+  output$effect_pval <- renderUI({
+    tags$span(
+      sprintf("%.2f", lme_summa()$effect_pval),
+    )
   })
 
   #----------------------
