@@ -15,7 +15,7 @@ ui <- page_navbar(
   padding = c(25, 5, 50, 5),
   header = includeCSS("styles/styles.css"),
   app_custom_footer(text = "v0.0.0-β - © 2026 Serge Zaugg"),
-  theme = bs_theme(version = 5, bootswatch = "cosmo"),
+  theme = bs_theme(version = 5, bootswatch = "sandstone",  bg = "#F5F1E9", fg = "#000000"),
   # "flatly"
   # "zephyr"
   # "cosmo"
@@ -37,13 +37,13 @@ ui <- page_navbar(
           # Column 1
           div(
             # numericInput("mu_a", "Mean A", 4),
-            sliderInput("mu_a","Mean A",min = 0,max = 10,value = 4,step = 0.1),
+            sliderInput("mu_a","Mean A",min = 0,max = 10,value = 4,step = 0.1, ticks = FALSE),
             numericInput("n_between_a", "N Clusters A", 5, min = 1),
           ),
           # Column 2
           div(
             # numericInput("mu_b", "Mean B", 5),
-            sliderInput("mu_b","Mean B",min = 0,max = 10,value = 4.5,step = 0.1),
+            sliderInput("mu_b","Mean B",min = 0,max = 10,value = 4.5,step = 0.1, ticks = FALSE),
             numericInput("n_between_b", "N Clusters B", 5, min = 1),
           ),
           # Column 3
