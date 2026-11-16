@@ -1,11 +1,11 @@
-# aaaaaaaaaaaaaaaaaaa
+# Random Effects Playground
 
 ### Features
-aaaaaaaaaaaaaaaaaaaaaaaaaa
+tbd
 
 ### Dependencies
 - R 4.5.1
-- tidyverse · shiny · bslib · metafor · thematic
+- tidyverse · shiny · bslib · lme4
 
 ### Data Source
 - Simulated data, no external data needed.
@@ -13,14 +13,14 @@ aaaaaaaaaaaaaaaaaaaaaaaaaa
 ### Installation
 * Install R and Rstudio (and git)
 * In Terminal/cmd/bash: Clone this repository
-* Open this repo in Rstudio as a project (e.g. double-click **type_m_error.Rproj**)
+* Open this repo in Rstudio as a project (e.g. double-click **didactic_randeff_app.Rproj**)
 * In R console:
   * Activate renv: ```renv::activate()```
   * Check needed R packages: ```renv::status()```
   * Install packages from renv.lock: ```renv::restore()```
 
 ### Usage - Start app (with R-studio)
-Open repo in Rstudio as a project (e.g. double-click ```type_m_error.Rproj```)  
+Open repo in Rstudio as a project (e.g. double-click ```didactic_randeff_app.Rproj```)  
 Easiest is to open app.R and then use the "Run app" button  
 For more control, use Rstudio's terminal and do  
 ```bash
@@ -44,13 +44,13 @@ Example ```cd "C:\Program Files\R\R-4.5.1\bin\"``` path many vary on each comput
 Install dependencies (skip if you already executed installation steps above)
 
 ```bash
-.\Rscript -e "renv::restore(project = '.../type_m_error')"
+.\Rscript -e "renv::restore(project = '.../didactic_randeff_app')"
 ```
 
 Call Rscript with repo path as argument to runApp(), below replace ... by your path to repo
 
 ```bash
-.\Rscript --no-init-file -e "shiny::runApp(appDir = '.../type_m_error', launch.browser = TRUE)"
+.\Rscript --no-init-file -e "shiny::runApp(appDir = '.../didactic_randeff_app', launch.browser = TRUE)"
 ```
 
 

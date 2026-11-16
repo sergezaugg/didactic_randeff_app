@@ -27,49 +27,6 @@ generate_hierarchical_data <- function(par) {
   )
 }
 
-plot_hierarchical_data <- function(dat) {
-  
-  
-  dat <- dat |>
-    dplyr::group_by(group) |>
-    dplyr::mutate(x_pos = as.numeric(factor(cluster))) |>
-    dplyr::ungroup()
-  
-  ggplot(dat,aes(x = factor(cluster), y = y)) +
-    geom_jitter(width = 0.1, height = 0.0) +
-    
-    geom_hline(
-      data = dat,
-      aes(yintercept = mu),
-      colour = "red",
-      linewidth = 0.8,
-      linetype = "dashed"
-    ) +
-    
-    geom_segment(
-      data = dat,
-      aes(
-        x = x_pos - 0.2,
-        xend = x_pos + 0.2,
-        y = mu + error_between,
-        yend = mu + error_between
-      ),
-      colour = "blue",
-      linewidth = 1
-    ) + 
-    
-    
-    facet_wrap(~group, scales = "free_x") +
-    labs(x = "Cluster",y = "Outcome", title = "") +
-    theme_classic() + 
-    theme(
-      panel.border = ggplot2::element_rect(
-        colour = "black",
-        fill = NA,
-        linewidth = 0.8
-      )
-    )
-}
 
 fit_random_effects_model <- function(df) {
   
@@ -104,6 +61,115 @@ fit_random_effects_model <- function(df) {
 
 
 
+# 
+# plot_hierarchical_data <- function(dat) {
+#   
+#   
+#   dat <- dat |>
+#     dplyr::group_by(group) |>
+#     dplyr::mutate(x_pos = as.numeric(factor(cluster))) |>
+#     dplyr::ungroup()
+#   
+#   ggplot(dat,aes(x = factor(cluster), y = y)) +
+#     geom_jitter(width = 0.1, height = 0.0) +
+#     
+#     geom_hline(
+#       data = dat,
+#       aes(yintercept = mu),
+#       colour = "red",
+#       linewidth = 0.8,
+#       linetype = "dashed"
+#     ) +
+#     
+#     geom_segment(
+#       data = dat,
+#       aes(
+#         x = x_pos - 0.2,
+#         xend = x_pos + 0.2,
+#         y = mu + error_between,
+#         yend = mu + error_between
+#       ),
+#       colour = "blue",
+#       linewidth = 1
+#     ) + 
+#     
+#     
+#     facet_wrap(~group, scales = "free_x") +
+#     labs(x = "Cluster",y = "Outcome", title = "") +
+#     theme_classic() + 
+#     theme(
+#       panel.border = ggplot2::element_rect(
+#         colour = "black",
+#         fill = NA,
+#         linewidth = 0.8
+#       )
+#     )
+# }
+# 
+
+plot_hierarchical_data <- function(dat, dark_mode = FALSE) {
+  
+  dat <- dat |>
+    dplyr::group_by(group) |>
+    dplyr::mutate(x_pos = as.numeric(factor(cluster))) |>
+    dplyr::ungroup()
+  
+  bg <- if (dark_mode) "#222222" else "white"
+  fg <- if (dark_mode) "#E0E0E0" else "#222222"
+  border <- if (dark_mode) "#777777" else "black"
+  point_col <- if (dark_mode) "#E0E0E0" else "#404040"
+  clust_col <- if (dark_mode) "cyan" else "blue"
+  
+  ggplot(dat, aes(x = factor(cluster), y = y)) +
+    geom_jitter(width = 0.1, height = 0, colour = point_col) +
+    
+    geom_hline(
+      aes(yintercept = mu),
+      colour = "red",
+      linewidth = 0.8,
+      linetype = "dashed"
+    ) +
+    
+    geom_segment(
+      aes(
+        x = x_pos - 0.2,
+        xend = x_pos + 0.2,
+        y = mu + error_between,
+        yend = mu + error_between
+      ),
+      colour = clust_col,
+      linewidth = 1
+    ) +
+    
+    facet_wrap(~group, scales = "free_x") +
+    labs(x = "Cluster", y = "Outcome", title = "") +
+    
+    theme_classic() +
+    theme(
+      text = element_text(colour = fg),
+      axis.text = element_text(colour = fg),
+      axis.title = element_text(colour = fg),
+      strip.text = element_text(colour = fg),
+      panel.background = element_rect(fill = bg),
+      plot.background = element_rect(fill = bg),
+      panel.border = element_rect(
+        colour = border,
+        fill = NA,
+        linewidth = 0.8
+      ),
+      axis.line = element_line(colour = fg)
+    ) + 
+    theme(
+      strip.background = element_rect(
+        fill = bg,
+        colour = border
+      ),
+      strip.text = element_text(
+        colour = fg,
+        face = "bold"
+      )
+    )
+}
 
 
 
