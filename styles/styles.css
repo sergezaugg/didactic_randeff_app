@@ -32,24 +32,6 @@
   z-index: 9999;
 }
 
-/* Custom style for compact cards */
-.card-header,
-.card-body {
-  display: flex;
-  align-items: center;     /* Vertical centering */
-  justify-content: center; /* Horizontal centering */
-  padding-top: 3px;
-  padding-bottom: 3px;
-  font-size: 15px;
-  line-height: 1.2;
-  text-align: center;
-}
-
-
-
-
-
-
 
 
 
