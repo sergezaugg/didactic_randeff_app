@@ -10,19 +10,12 @@ library(lme4)
 source("src/utils.R")
 source("src/utils_styles.R")
 
-
-
 ui <- page_navbar(
   title = "Random Effects Playground",
-  
-  app_custom_footer(text = "v0.0.0-β - © 2026 Serge Zaugg"),
-  
-
-  # CSS
+  padding = c(25, 5, 50, 5),
   header = includeCSS("styles/styles.css"),
-  
+  app_custom_footer(text = "v0.0.0-β - © 2026 Serge Zaugg"),
   theme = bs_theme(version = 5, bootswatch = "cosmo"),
-  
   # "flatly"
   # "zephyr"
   # "cosmo"
@@ -33,12 +26,12 @@ ui <- page_navbar(
   nav_panel(
     "Simulate",
 
-    # get CSS styles
-    includeCSS("styles/styles.css"),
     layout_columns(
       col_widths = c(4, 4, 4),
+
       card(
         card_header("Simulation parameters"),
+        
         layout_columns(
           col_widths = c(4, 4, 4),
           # Column 1
@@ -84,6 +77,7 @@ ui <- page_navbar(
       )
     ),
     layout_columns(
+      heights = "200px",
       col_widths = c(4, 4, 4),
       card(
         card_header("Simulated data"),
