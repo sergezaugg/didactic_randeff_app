@@ -12,6 +12,8 @@ source("src/utils.R")
 source("src/utils_styles.R")
 source("src/ui_modules.R")
 source("src/server_modules.R")
+source("src/ui_about_page.R")
+source("contents/text_for_pages.R")
 
 ui <- page_navbar(
   title = "Random Effects Playground",
@@ -40,7 +42,7 @@ ui <- page_navbar(
   # Page 2
   nav_panel(
     "About",
-    page_fluid()
+    ui_about_page()
   ),
 
   # elements right of navbar
