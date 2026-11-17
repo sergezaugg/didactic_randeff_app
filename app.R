@@ -54,6 +54,7 @@ ui <- page_navbar(
 
 
 server <- function(input, output, session) {
+  true_effect <- server_module_get_true_effect(id = "pg01")
   # ....
   dat <- server_module_gen_data(id = "pg01")
   server_module_render_sim_data_plot(id = "drk", df = dat)

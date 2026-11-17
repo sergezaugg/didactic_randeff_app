@@ -3,6 +3,15 @@
 # Author : Serge Zaugg
 # ---------------------------
 
+server_module_get_true_effect <- function(id) {
+  moduleServer(id, function(input, output, session) {
+    output$true_effect <- renderText({
+      # input$mu_b - input$mu_a
+      sprintf("%.2f", input$mu_b - input$mu_a)
+    }) 
+  })
+}
+
 
 server_module_gen_data <- function(id) {
   moduleServer(id, function(input, output, session) {

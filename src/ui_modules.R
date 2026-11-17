@@ -11,6 +11,7 @@ ui_module_sim_param_usr_input <- function(id, title = "") {
     card_header(
       title,
       class = "d-flex justify-content-between align-items-center",
+      # refresh button 
       actionButton(
         inputId = ns("btn_rerun"), 
         "Re-run",
@@ -24,18 +25,26 @@ ui_module_sim_param_usr_input <- function(id, title = "") {
       div(
         sliderInput(
           inputId = ns("mu_a"),
-          "Mean A", min = 0, max = 5, value = 2, step = 0.5, ticks = FALSE
+          "Mean A", min = 0, max = 5, value = 2, step = 0.2, ticks = FALSE
         ),
         numericInput(
           inputId = ns("n_between_a"),
           "N Clusters A", 5, min = 1
         ),
+        
+        br(),
+        br(),
+        div(
+          span("True effect"),
+          textOutput(ns("true_effect"), inline = TRUE)
+        )
       ),
+      
       # Column 2
       div(
         sliderInput(
           inputId = ns("mu_b"),
-          "Mean B", min = 0, max = 5, value = 3, step = 0.5, ticks = FALSE
+          "Mean B", min = 0, max = 5, value = 3, step = 0.2, ticks = FALSE
         ),
         numericInput(
           inputId = ns("n_between_b"),
