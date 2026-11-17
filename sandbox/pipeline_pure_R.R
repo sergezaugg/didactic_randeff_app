@@ -11,11 +11,11 @@ source("src/utils.R")
 # user input 
 mu_a <- 4
 mu_b <- 5
-n_between_a <- 10
-n_between_b <- 7
+n_between_a <- 100
+n_between_b <- 100
 n_within <- 5
-sd_between <- 0.5
-sd_within <- 0.5
+sd_between <- 0.2
+sd_within <- 0.8
 
 #----------------------
 # server 
@@ -48,17 +48,18 @@ dat <- generate_hierarchical_data(par)
 lme_obj <- fit_random_effects_model(df = dat)
 lm_obj  <- fit_simple_linear_model(df = dat)
 
-lme_obj$df_random
+# lme_obj$df_random
+# lm_obj$df_random
+# lme_obj$df_random
+# lm_obj$df_random
+
+sigma_clu <- lme_obj$df_random |> filter(groups == "cluster") |> pull("std_dev")
+sigma_resid <- lme_obj$df_random |> filter(groups == "Residual") |> pull("std_dev")
+
+sqrt((sigma_clu^2) + ((sigma_resid^2)))
+
+
 lm_obj$df_random
-
-lme_obj$df_random
-lm_obj$df_random
-
-
-
-
-
-
 
 
 

@@ -19,7 +19,7 @@ ui <- page_navbar(
   title = "Random Effects Playground",
   padding = c(25, 5, 50, 5),
   header = includeCSS("styles/styles.css"),
-  app_custom_footer(text = "v0.9.0-β - © 2026 Serge Zaugg"),
+  app_custom_footer(text = "v0.9.1-β - © 2026 Serge Zaugg"),
   theme = bs_theme(version = 5, bootswatch = "sandstone", bg = "#F5F1E9", fg = "#000000"),
 
   # Page 1
@@ -29,13 +29,13 @@ ui <- page_navbar(
       col_widths = c(4, 4, 4),
       ui_module_sim_param_usr_input(id = "pg01", title = "Simulation parameters"),
       ui_module_lme_estimates(id = "pg01a", title = "LME estimates (accounts for clusters)"),
-      card(card_header("Panel xx"), plotOutput("plot2"))
+      card(card_header("Quick guide ..."))
     ),
     layout_columns(
       col_widths = c(4, 4, 4),
       ui_module_show_plot_sim_data(id = "drk", title = "Simulated data"),
       ui_module_lme_estimates(id = "pg01b", title = "LM estimates (! wrong because ignores clusters !)"),
-      card(card_header("Panel yy"), plotOutput("plot2"))
+      card(card_header("VIZ ..."))
     )
   ),
 
