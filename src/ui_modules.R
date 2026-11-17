@@ -4,44 +4,62 @@
 # ---------------------------
 
 
-ui_module_sim_param_usr_input <- function(id, title = "aa") {
+ui_module_sim_param_usr_input <- function(id, title = "") {
   ns <- NS(id)
 
   card(
-    card_header(title),
+    card_header(
+      title,
+      class = "d-flex justify-content-between align-items-center",
+      # refresh button 
+      actionButton(
+        inputId = ns("btn_rerun"), 
+        "Re-run",
+        icon = icon("rotate"),
+        class = "btn-primary"
+      )    
+    ),
     layout_columns(
       col_widths = c(4, 4, 4),
       # Column 1
       div(
         sliderInput(
           inputId = ns("mu_a"),
-          "Mean A", min = 0, max = 10, value = 4, step = 0.1, ticks = FALSE
+          "Mean A", min = 0, max = 5, value = 2, step = 0.2, ticks = FALSE
         ),
         numericInput(
           inputId = ns("n_between_a"),
           "N Clusters A", 5, min = 1
         ),
+        
+        br(),
+        br(),
+        div(
+          span("True effect"),
+          textOutput(ns("true_effect"), inline = TRUE)
+        )
       ),
+      
       # Column 2
       div(
         sliderInput(
           inputId = ns("mu_b"),
-          "Mean B", min = 0, max = 10, value = 4.5, step = 0.1, ticks = FALSE
+          "Mean B", min = 0, max = 5, value = 3, step = 0.2, ticks = FALSE
         ),
         numericInput(
           inputId = ns("n_between_b"),
           "N Clusters B", 5, min = 1
-        ),
+        )
       ),
       # Column 3
       div(
         numericInput(
           inputId = ns("sd_between"),
-          "SD clusters", 0.3, min = 0.1, max = 2, step = 0.1
+          "SD clusters", 0.5, min = 0.1, max = 2, step = 0.1
         ),
         numericInput(
           inputId = ns("sd_within"),
-          "SD residual", 0.3, min = 0.1, max = 2, step = 0.1
+          "SD residual", 0.5, min = 0.1, max = 2, step = 0.1
         ),
         numericInput(
           inputId = ns("n_within"),

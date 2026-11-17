@@ -3,10 +3,19 @@
 # Author : Serge Zaugg
 # ---------------------------
 
+server_module_get_true_effect <- function(id) {
+  moduleServer(id, function(input, output, session) {
+    output$true_effect <- renderText({
+      # input$mu_b - input$mu_a
+      sprintf("%.2f", input$mu_b - input$mu_a)
+    }) 
+  })
+}
+
 
 server_module_gen_data <- function(id) {
   moduleServer(id, function(input, output, session) {
-    reactive({
+   reactive({
       par <- list(
         mu_a = input$mu_a,
         mu_b = input$mu_b,
@@ -16,8 +25,11 @@ server_module_gen_data <- function(id) {
         sd_be = input$sd_between,
         sd_wi = input$sd_within
       )
+      # trigger re-simulate if button clicked
+      input$btn_rerun
+      # perform re-simulate
       generate_hierarchical_data(par)
-    })
+    }) 
   })
 }
 
