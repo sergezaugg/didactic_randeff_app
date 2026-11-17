@@ -14,7 +14,7 @@ mu_b <- 5
 n_between_a <- 10
 n_between_b <- 7
 n_within <- 5
-sd_between <- 0.1
+sd_between <- 0.5
 sd_within <- 0.5
 
 #----------------------
@@ -41,6 +41,18 @@ estim_effect_ci_lo <- lme_obj$df_fixed |> filter(Term == 'groupB') |> pull('ci_l
 estim_effect_ci_up <- lme_obj$df_fixed |> filter(Term == 'groupB') |> pull('ci_upper')
 estim_effect_pval  <- lme_obj$p_value
 
+
+
+dat <- generate_hierarchical_data(par)
+
+lme_obj <- fit_random_effects_model(df = dat)
+lm_obj  <- fit_simple_linear_model(df = dat)
+
+lme_obj$df_random
+lm_obj$df_random
+
+lme_obj$df_random
+lm_obj$df_random
 
 
 

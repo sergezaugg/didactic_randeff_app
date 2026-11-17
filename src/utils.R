@@ -59,53 +59,36 @@ fit_random_effects_model <- function(df) {
 }
 
 
+fit_simple_linear_model <- function(df) {
 
+  mod <- lm(y ~ group, data = df)
+  
+  ci <- confint(mod, method = "profile")
+  
+  df_random <- data.frame(
+    groups = c("cluster", "Residual"),
+    std_dev = c(NA, sigma(mod))
+  )
+  
+  df_fixed <- as.data.frame(coef(summary(mod))) |>
+    rownames_to_column("Term") |>
+    mutate(
+      ci_lower = ci[Term, 1],
+      ci_upper = ci[Term, 2]
+    )
+  
+  p_value <- df_fixed[2,'Pr(>|t|)']
+  
+  list(
+    mod = mod,
+    df_random = df_random,
+    df_fixed = df_fixed,
+    p_value = p_value,
+    singular = NA
+  )
+  
+}
 
-# 
-# plot_hierarchical_data <- function(dat) {
-#   
-#   
-#   dat <- dat |>
-#     dplyr::group_by(group) |>
-#     dplyr::mutate(x_pos = as.numeric(factor(cluster))) |>
-#     dplyr::ungroup()
-#   
-#   ggplot(dat,aes(x = factor(cluster), y = y)) +
-#     geom_jitter(width = 0.1, height = 0.0) +
-#     
-#     geom_hline(
-#       data = dat,
-#       aes(yintercept = mu),
-#       colour = "red",
-#       linewidth = 0.8,
-#       linetype = "dashed"
-#     ) +
-#     
-#     geom_segment(
-#       data = dat,
-#       aes(
-#         x = x_pos - 0.2,
-#         xend = x_pos + 0.2,
-#         y = mu + error_between,
-#         yend = mu + error_between
-#       ),
-#       colour = "blue",
-#       linewidth = 1
-#     ) + 
-#     
-#     
-#     facet_wrap(~group, scales = "free_x") +
-#     labs(x = "Cluster",y = "Outcome", title = "") +
-#     theme_classic() + 
-#     theme(
-#       panel.border = ggplot2::element_rect(
-#         colour = "black",
-#         fill = NA,
-#         linewidth = 0.8
-#       )
-#     )
-# }
-# 
 
 plot_hierarchical_data <- function(dat, dark_mode = FALSE) {
   

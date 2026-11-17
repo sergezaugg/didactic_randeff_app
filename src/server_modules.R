@@ -39,6 +39,12 @@ server_module_fit_re_mod <- function(df) {
 }
 
 
+server_module_fit_lm_mod <- function(df) {
+  reactive({ fit_simple_linear_model(df = df()) })
+}
+
+
+
 server_module_prepare_lme_outputs <- function(id, lme_obj) {
   moduleServer(id, function(input, output, session) {
   

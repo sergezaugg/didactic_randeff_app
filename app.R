@@ -26,13 +26,14 @@ ui <- page_navbar(
     layout_columns(
       col_widths = c(4, 4, 4),
       ui_module_sim_param_usr_input(id = "pg01", title = "Simulation parameters"),
-      ui_module_lme_estimates(id = "pg01", title = "LME estimates (accounts for clusters)"),
+      ui_module_lme_estimates(id = "pg01a", title = "LME estimates (accounts for clusters)"),
       card(card_header("Panel xx"),plotOutput("plot2"))
     ),
     layout_columns(
       col_widths = c(4, 4, 4),
       ui_module_show_plot_sim_data(id = "drk", title = "Simulated data"),
-      card(card_header("LM estimates (ignores clusters)"),plotOutput("plot4")),
+      ui_module_lme_estimates(id = "pg01b", title = "LM estimates (ignores clusters)"),
+
       card(card_header("Panel yy"),plotOutput("plot2")
       )
     )
@@ -57,8 +58,12 @@ ui <- page_navbar(
 server <- function(input, output, session) {
   dat <- server_module_gen_data(id = "pg01")
   server_module_render_sim_data_plot(id = "drk", df = dat)
+  # fit lme model
   lme_obj <- server_module_fit_re_mod(df = dat) # not using input or output
-  server_module_prepare_lme_outputs(id = "pg01", lme_obj = lme_obj)
+  server_module_prepare_lme_outputs(id = "pg01a", lme_obj = lme_obj)
+  # fit simple lm
+  slm_obj <- server_module_fit_lm_mod(df = dat) # not using input or output
+  server_module_prepare_lme_outputs(id = "pg01b", lme_obj = slm_obj)
 
 }
 
