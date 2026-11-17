@@ -1,5 +1,5 @@
 # ---------------------------
-# Description : server modules 
+# Description : server modules
 # Author : Serge Zaugg
 # ---------------------------
 
@@ -30,22 +30,29 @@ server_module_render_sim_data_plot <- function(id, df) {
     output$plot_data <- renderPlot({
       plot_resu()
     })
-  })  
+  })
 }
 
 
 server_module_fit_re_mod <- function(df) {
-  reactive({ fit_random_effects_model(df = df()) })
+  reactive({
+    fit_random_effects_model(df = df())
+  })
+}
+
+
+server_module_fit_lm_mod <- function(df) {
+  reactive({
+    fit_simple_linear_model(df = df())
+  })
 }
 
 
 server_module_prepare_lme_outputs <- function(id, lme_obj) {
   moduleServer(id, function(input, output, session) {
-  
     lme_summa <- reactive({
-      
       obj <- lme_obj()
-      
+
       list(
         sd_between   = obj$df_random |> filter(groups == "cluster") |> pull("std_dev"),
         sd_resid     = obj$df_random |> filter(groups == "Residual") |> pull("std_dev"),
@@ -56,33 +63,35 @@ server_module_prepare_lme_outputs <- function(id, lme_obj) {
         effect_pval  = obj$p_value
       )
     })
-    
+
     output$sd_between <- renderUI({
       tags$span(
         sprintf("%.2f", lme_summa()$sd_between),
       )
     })
-    
+
     output$sd_resid <- renderUI({
       tags$span(
         sprintf("%.2f", lme_summa()$sd_resid),
       )
     })
-    
+
     output$effect_mean <- renderUI({
       tags$span(
         sprintf("%.2f", lme_summa()$effect_mean),
       )
     })
-    
+
     output$effect_std <- renderUI({
       tags$span(
-        sprintf("(%.2f to %.2f)",
-                lme_summa()$effect_ci_lo,
-                lme_summa()$effect_ci_up),
+        sprintf(
+          "(%.2f to %.2f)",
+          lme_summa()$effect_ci_lo,
+          lme_summa()$effect_ci_up
+        ),
       )
     })
-    
+
     output$effect_pval <- renderUI({
       tags$span(
         sprintf("%.2f", lme_summa()$effect_pval),
@@ -90,6 +99,3 @@ server_module_prepare_lme_outputs <- function(id, lme_obj) {
     })
   })
 }
-
-
-

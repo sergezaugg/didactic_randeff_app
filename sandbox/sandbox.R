@@ -12,8 +12,8 @@
 
 # install.packages("styler")
 # styler::style_file("app.R")
-# styler::style_file("src/utils_plots.R")
-# styler::style_file("src/utils_sim.R")
-# styler::style_file("src/server_page01.R")
+# styler::style_file("src/utils.R")
+# styler::style_file("src/server_modules.R")
+# styler::style_file("src/ui_modules.R")
 
 

@@ -1,13 +1,12 @@
 # ---------------------------
-# Description : page 
+# Description : page
 # Author : Serge Zaugg
 # ---------------------------
 
 
-ui_module_sim_param_usr_input <- function(id, title = "aa") { 
-  
+ui_module_sim_param_usr_input <- function(id, title = "aa") {
   ns <- NS(id)
-  
+
   card(
     card_header(title),
     layout_columns(
@@ -16,103 +15,95 @@ ui_module_sim_param_usr_input <- function(id, title = "aa") {
       div(
         sliderInput(
           inputId = ns("mu_a"),
-          "Mean A",min = 0,max = 10,value = 4,step = 0.1, ticks = FALSE),
+          "Mean A", min = 0, max = 10, value = 4, step = 0.1, ticks = FALSE
+        ),
         numericInput(
-          inputId = ns("n_between_a"), 
-          "N Clusters A", 5, min = 1),
+          inputId = ns("n_between_a"),
+          "N Clusters A", 5, min = 1
+        ),
       ),
       # Column 2
       div(
         sliderInput(
           inputId = ns("mu_b"),
-          "Mean B",min = 0,max = 10,value = 4.5,step = 0.1, ticks = FALSE),
+          "Mean B", min = 0, max = 10, value = 4.5, step = 0.1, ticks = FALSE
+        ),
         numericInput(
-          inputId = ns("n_between_b"), 
-          "N Clusters B", 5, min = 1),
+          inputId = ns("n_between_b"),
+          "N Clusters B", 5, min = 1
+        ),
       ),
       # Column 3
       div(
         numericInput(
-          inputId = ns("sd_between"), 
-          "SD clusters", 0.3, min = 0.1, max = 2, step = 0.1),
+          inputId = ns("sd_between"),
+          "SD clusters", 0.3, min = 0.1, max = 2, step = 0.1
+        ),
         numericInput(
-          inputId = ns("sd_within"), 
-          "SD residual", 0.3, min = 0.1,  max = 2, step = 0.1),
+          inputId = ns("sd_within"),
+          "SD residual", 0.3, min = 0.1, max = 2, step = 0.1
+        ),
         numericInput(
-          inputId = ns("n_within"), 
-          "N per cluster", 5, min = 1)
+          inputId = ns("n_within"),
+          "N per cluster", 5, min = 2, max = 20
+        )
       )
     )
   )
 }
 
 
-
-
-
-
-
-
-ui_module_lme_estimates <- function(id, title = "aa") { 
-  
+ui_module_lme_estimates <- function(id, title = "aa") {
   ns <- NS(id)
-  
-  card( 
+
+  card(
     card_header(title),
     layout_columns(
-      value_box(title = "Mean effect", 
-                value = uiOutput(outputId = ns("effect_mean")), 
-                height = "60px", theme = "primary", class = "center-value" ),
-      value_box(title = "SD between", 
-                value = uiOutput(outputId = ns("sd_between")), 
-                height = "60px", theme = "primary", class = "center-value"),
+      value_box(
+        title = "Mean effect",
+        value = uiOutput(outputId = ns("effect_mean")),
+        height = "60px", theme = "primary", class = "center-value"
+      ),
+      value_box(
+        title = "SD between",
+        value = uiOutput(outputId = ns("sd_between")),
+        height = "60px", theme = "primary", class = "center-value"
+      ),
       col_widths = c(6, 6)
     ),
     layout_columns(
-      value_box(title = "95% CI",      
-                value = uiOutput(outputId = ns("effect_std")),  
-                height = "60px", theme = "primary", class = "center-value"),
-      value_box(title = "SD residuals", 
-                value = uiOutput(outputId = ns("sd_resid")), 
-                height = "60px", theme = "primary", class = "center-value"),
+      value_box(
+        title = "95% CI",
+        value = uiOutput(outputId = ns("effect_std")),
+        height = "60px", theme = "primary", class = "center-value"
+      ),
+      value_box(
+        title = "SD residuals",
+        value = uiOutput(outputId = ns("sd_resid")),
+        height = "60px", theme = "primary", class = "center-value"
+      ),
       col_widths = c(6, 6)
     ),
     layout_columns(
-      value_box(title = "P-value effect", 
-                value = uiOutput(outputId = ns("effect_pval")), 
-                height = "60px", theme = "primary", class = "center-value"),
+      value_box(
+        title = "P-value effect",
+        value = uiOutput(outputId = ns("effect_pval")),
+        height = "60px", theme = "primary", class = "center-value"
+      ),
       col_widths = c(6, 6)
     )
   )
 }
 
 
-
-
-
-
-
-
-
-
-
-ui_module_show_plot_sim_data <- function(id, title = "aa") { 
-  
+ui_module_show_plot_sim_data <- function(id, title = "aa") {
   ns <- NS(id)
 
   card(
     card_header(title),
     plotOutput(
-      outputId = ns("plot_data"), 
-      height = "300px")
+      outputId = ns("plot_data"),
+      height = "300px"
+    )
   )
 }
-
-
-
-
-
-
-
-
-
