@@ -6,17 +6,17 @@
 generate_hierarchical_data <- function(par) {
   n <- (par$n_be_a + par$n_be_b) * par$n_wi
   n_clu <- (par$n_be_a + par$n_be_b)
-  # group indicator 
+  # group indicator
   group <- c(rep(c("A"), each = par$n_be_a * par$n_wi), rep(c("B"), each = par$n_be_b * par$n_wi))
   # per-group mean
   mu <- c(rep(par$mu_a, each = par$n_be_a * par$n_wi), rep(par$mu_b, each = par$n_be_b * par$n_wi))
   # cluster/patient id
-  cluster <- rep(rep(seq_len(n_clu), each = par$n_wi),times = 1)
+  cluster <- rep(rep(seq_len(n_clu), each = par$n_wi), times = 1)
   # per-cluser 'random' mean
   error_between <- rep(rnorm(n_clu, 0, par$sd_be), each = par$n_wi)
   # measurement error
   error_within <- rnorm(n, 0, par$sd_wi)
-  # put together 
+  # put together
   data.frame(
     group,
     cluster,
@@ -29,25 +29,24 @@ generate_hierarchical_data <- function(par) {
 
 
 fit_random_effects_model <- function(df) {
-  
   mod <- lmer(y ~ group + (1 | cluster), data = df)
   mod_null <- lmer(y ~ 1 + (1 | cluster), data = df)
-  
+
   ci <- confint(mod, parm = "beta_", method = "profile")
-  
+
   df_random <- as.data.frame(VarCorr(mod)) |>
     select(groups = grp, std_dev = sdcor)
-  
+
   df_fixed <- as.data.frame(coef(summary(mod))) |>
     rownames_to_column("Term") |>
     mutate(
       ci_lower = ci[Term, 1],
       ci_upper = ci[Term, 2]
     )
-  
+
   df_lrt <- as.data.frame(anova(mod_null, mod))
   p_value <- df_lrt$`Pr(>Chisq)`[2]
-  
+
   list(
     mod = mod,
     df_random = df_random,
@@ -55,30 +54,28 @@ fit_random_effects_model <- function(df) {
     p_value = p_value,
     singular = isSingular(mod)
   )
-  
 }
 
 
 fit_simple_linear_model <- function(df) {
-
   mod <- lm(y ~ group, data = df)
-  
+
   ci <- confint(mod, method = "profile")
-  
+
   df_random <- data.frame(
     groups = c("cluster", "Residual"),
     std_dev = c(NA, sigma(mod))
   )
-  
+
   df_fixed <- as.data.frame(coef(summary(mod))) |>
     rownames_to_column("Term") |>
     mutate(
       ci_lower = ci[Term, 1],
       ci_upper = ci[Term, 2]
     )
-  
-  p_value <- df_fixed[2,'Pr(>|t|)']
-  
+
+  p_value <- df_fixed[2, "Pr(>|t|)"]
+
   list(
     mod = mod,
     df_random = df_random,
@@ -86,33 +83,29 @@ fit_simple_linear_model <- function(df) {
     p_value = p_value,
     singular = NA
   )
-  
 }
 
 
 plot_hierarchical_data <- function(dat, dark_mode = FALSE) {
-  
   dat <- dat |>
     dplyr::group_by(group) |>
     dplyr::mutate(x_pos = as.numeric(factor(cluster))) |>
     dplyr::ungroup()
-  
+
   bg <- if (dark_mode) "#222222" else "white"
   fg <- if (dark_mode) "#E0E0E0" else "#222222"
   border <- if (dark_mode) "#777777" else "black"
   point_col <- if (dark_mode) "#E0E0E0" else "#404040"
   clust_col <- if (dark_mode) "cyan" else "blue"
-  
+
   ggplot(dat, aes(x = factor(cluster), y = y)) +
     geom_jitter(width = 0.1, height = 0, colour = point_col) +
-    
     geom_hline(
       aes(yintercept = mu),
       colour = "red",
       linewidth = 0.8,
       linetype = "dashed"
     ) +
-    
     geom_segment(
       aes(
         x = x_pos - 0.2,
@@ -123,10 +116,8 @@ plot_hierarchical_data <- function(dat, dark_mode = FALSE) {
       colour = clust_col,
       linewidth = 1
     ) +
-    
     facet_wrap(~group, scales = "free_x") +
     labs(x = "Cluster", y = "Outcome", title = "") +
-    
     theme_classic() +
     theme(
       text = element_text(colour = fg),
@@ -141,7 +132,7 @@ plot_hierarchical_data <- function(dat, dark_mode = FALSE) {
         linewidth = 0.8
       ),
       axis.line = element_line(colour = fg)
-    ) + 
+    ) +
     theme(
       strip.background = element_rect(
         fill = bg,
@@ -153,7 +144,3 @@ plot_hierarchical_data <- function(dat, dark_mode = FALSE) {
       )
     )
 }
-
-
-
-
