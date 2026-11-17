@@ -61,24 +61,25 @@ ui_module_lme_estimates <- function(id, title = "aa") {
     card_header(title),
     layout_columns(
       value_box(title = "Mean effect", 
-                value = uiOutput("effect_mean"), 
+                value = uiOutput(outputId = ns("effect_mean")), 
                 height = "60px", theme = "primary", class = "center-value" ),
       value_box(title = "SD between", 
-                value = uiOutput("sd_between"), 
+                value = uiOutput(outputId = ns("sd_between")), 
                 height = "60px", theme = "primary", class = "center-value"),
       col_widths = c(6, 6)
     ),
     layout_columns(
       value_box(title = "95% CI",      
-                value = uiOutput("effect_std"),  
+                value = uiOutput(outputId = ns("effect_std")),  
                 height = "60px", theme = "primary", class = "center-value"),
-      value_box(title = "SD residuals", value = uiOutput("sd_resid"), 
+      value_box(title = "SD residuals", 
+                value = uiOutput(outputId = ns("sd_resid")), 
                 height = "60px", theme = "primary", class = "center-value"),
       col_widths = c(6, 6)
     ),
     layout_columns(
       value_box(title = "P-value effect", 
-                value = uiOutput("effect_pval"), 
+                value = uiOutput(outputId = ns("effect_pval")), 
                 height = "60px", theme = "primary", class = "center-value"),
       col_widths = c(6, 6)
     )
