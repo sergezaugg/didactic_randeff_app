@@ -6,7 +6,7 @@
 
 server_module_gen_data <- function(id) {
   moduleServer(id, function(input, output, session) {
-    reactive({
+   reactive({
       par <- list(
         mu_a = input$mu_a,
         mu_b = input$mu_b,
@@ -16,8 +16,11 @@ server_module_gen_data <- function(id) {
         sd_be = input$sd_between,
         sd_wi = input$sd_within
       )
+      # trigger re-simulate if button clicked
+      input$btn_rerun
+      # perform re-simulate
       generate_hierarchical_data(par)
-    })
+    }) 
   })
 }
 

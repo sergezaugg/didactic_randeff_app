@@ -27,6 +27,7 @@ ui <- page_navbar(
     "Simulate",
     layout_columns(
       col_widths = c(4, 4, 4),
+      # ....
       ui_module_sim_param_usr_input(id = "pg01", title = "Simulation parameters"),
       ui_module_lme_estimates(id = "pg01a", title = "LME estimates (accounts for clusters)"),
       card(card_header("Quick guide ..."))
@@ -53,6 +54,7 @@ ui <- page_navbar(
 
 
 server <- function(input, output, session) {
+  # ....
   dat <- server_module_gen_data(id = "pg01")
   server_module_render_sim_data_plot(id = "drk", df = dat)
   # fit lme model
