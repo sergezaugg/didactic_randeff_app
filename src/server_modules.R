@@ -34,14 +34,6 @@ server_module_render_sim_data_plot <- function(id, df) {
 }
 
 
-# server_module_fit_re_mod <- function(id, df) {
-#   moduleServer(id, function(input, output, session) {
-#     reactive({
-#       fit_random_effects_model(df = df())
-#     })
-#   })
-# }
-
 server_module_fit_re_mod <- function(df) {
   reactive({ fit_random_effects_model(df = df()) })
 }
