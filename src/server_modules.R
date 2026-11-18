@@ -38,7 +38,7 @@ server_module_gen_data <- function(id) {
       # perform re-simulate
       generate_hierarchical_data(par)
     }) %>%
-      debounce(800)
+      debounce(500)
     return(dat_val)
   })
 }

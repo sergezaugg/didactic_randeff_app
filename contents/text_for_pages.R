@@ -31,7 +31,7 @@ ptext <- list(
   
   quick_guide_tx_1 = "Panel 1: Set true values from which to simulate datasets",
   quick_guide_tx_2 = "Panel 5: See realization of dataset (RE-RUN to simulate new)",
-  quick_guide_tx_3 = "Panel 2 & 3: See effect etimates (95%-CIs) from LME & SLM",
+  quick_guide_tx_3 = "Panel 2 & 3: See effect etimates (95%-CIs) from LMM & SLM",
   quick_guide_tx_4 = "Panel 6: Visually compare etimates (95%-CIs) to null hypothesis",  
   
   quick_guide_tx_5 = "Initial scenario has groups A and B with same mean, so the true effect is zero. 

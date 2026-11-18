@@ -163,7 +163,7 @@ make_forest_plot <- function(lm_obj, lme_obj, true_effect, dark_mode = FALSE) {
     theme(legend.position = "none") +
     scale_x_discrete(
       labels = c(
-        "0_LME" = "LME",
+        "0_LME" = "LMM",
         "1_LM"  = "SLM"
       )
     ) +

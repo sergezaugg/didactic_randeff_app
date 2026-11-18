@@ -8,7 +8,7 @@ ui_module_sim_param_usr_input <- function(id, icon, title = "") {
   ns <- NS(id)
   card(
     card_header(
-      div(icon, span(title), style = "display: flex; align-items: center; gap: 20px;"),
+      div(icon, span(title), style = "display: flex; align-items: center; gap: 10px;"),
       class = "d-flex justify-content-between align-items-center",
       # refresh button
       actionButton(
@@ -74,7 +74,7 @@ ui_module_lme_estimates <- function(id, icon = "", title = "") {
 
   card(
     card_header(
-      div(icon, span(title), style = "display: flex; align-items: center; gap: 20px;"),
+      div(icon, span(title), style = "display: flex; align-items: center; gap: 10px;"),
     ),
     layout_columns(
       value_box(
@@ -118,7 +118,7 @@ ui_module_show_plot_sim_data <- function(id, icon = "", title = "") {
   ns <- NS(id)
   card(
     card_header(
-      div(icon, span(title), style = "display: flex; align-items: center; gap: 20px;"),
+      div(icon, span(title), style = "display: flex; align-items: center; gap: 10px;"),
     ),
     card_body(
       plotOutput(
@@ -135,7 +135,7 @@ ui_module_show_forest_plot <- function(id, icon = "", title = "") {
   ns <- NS(id)
   card(
     card_header(
-      div(icon, span(title), style = "display: flex; align-items: center; gap: 20px;"),
+      div(icon, span(title), style = "display: flex; align-items: center; gap: 10px;"),
     ),
     card_body(
       plotOutput(

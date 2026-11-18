@@ -1,8 +1,8 @@
 # Random Effects Playground
 
 ### Features
-This didactic Shiny app provides an interactive introduction to clustered data and linear mixed-effects models (LMMs), 
-helping users understand how clustering influences statistical analysis. Users can simulate clustered 
+This didactic Shiny app provides an intuitive introduction to clustered data and 
+linear mixed-effects models (LMMs) for non-statisticians. Users can simulate clustered 
 data by adjusting between-cluster variance, residual variance, and the true difference between groups. 
 The simulated data are analysed using both LMMs and simple linear models (SLMs), allowing users 
 to compare estimated effects, p-values, and confidence intervals. The comparison illustrates why 

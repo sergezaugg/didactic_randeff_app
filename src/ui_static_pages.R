@@ -6,7 +6,7 @@
 ui_quick_guide <- function(icon, title) {
   card(
     card_header(
-      div(icon, span(title), style = "display: flex; align-items: center; gap: 20px;")
+      div(icon, span(title), style = "display: flex; align-items: center; gap: 10px;")
     ),
     div(
       lapply(1:4, function(i) {
