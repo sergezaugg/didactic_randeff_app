@@ -6,23 +6,24 @@
 server_module_get_true_effect <- function(id) {
   moduleServer(id, function(input, output, session) {
     output$true_effect <- renderText({
-      # input$mu_b - input$mu_a
       sprintf("%.2f", input$mu_b - input$mu_a)
-    }) 
+    })
   })
 }
 
 
 server_module_get_true_effect_num <- function(id) {
   moduleServer(id, function(input, output, session) {
-    reactive({input$mu_b - input$mu_a})
+    reactive({
+      input$mu_b - input$mu_a
+    })
   })
 }
 
 
 server_module_gen_data <- function(id) {
   moduleServer(id, function(input, output, session) {
-   dat_val <- reactive({
+    dat_val <- reactive({
       par <- list(
         mu_a = input$mu_a,
         mu_b = input$mu_b,
@@ -31,7 +32,7 @@ server_module_gen_data <- function(id) {
         n_wi = input$n_within,
         sd_be = input$sd_between,
         sd_wi = input$sd_within
-      ) 
+      )
       # trigger re-simulate if button clicked
       input$btn_rerun
       # perform re-simulate
@@ -47,9 +48,9 @@ server_module_render_sim_data_plot <- function(id, df) {
   moduleServer(id, function(input, output, session) {
     plot_resu <- reactive({
       plot_hierarchical_data(
-        dat = df(), 
+        dat = df(),
         dark_mode = identical(input$dark_mode, "dark")
-        )
+      )
     })
     output$plot_data <- renderPlot({
       plot_resu()
@@ -58,28 +59,21 @@ server_module_render_sim_data_plot <- function(id, df) {
 }
 
 
-
 server_module_make_forest_plot <- function(id, lm_obj, lme_obj) {
   moduleServer(id, function(input, output, session) {
     plot_resu2 <- reactive({
       make_forest_plot(
-        lm_obj = lm_obj(), 
-        lme_obj = lme_obj(), 
+        lm_obj = lm_obj(),
+        lme_obj = lme_obj(),
         true_effect = 99, # true_effect_num(),
         dark_mode = identical(input$dark_mode, "dark")
-        )
+      )
     })
-    output$forest_plot <- renderPlot({plot_resu2()})
+    output$forest_plot <- renderPlot({
+      plot_resu2()
+    })
   })
 }
-
-
-
-
-
-
-
-
 
 
 server_module_fit_re_mod <- function(df) {

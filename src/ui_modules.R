@@ -10,13 +10,13 @@ ui_module_sim_param_usr_input <- function(id, icon, title = "") {
     card_header(
       div(icon, span(title), style = "display: flex; align-items: center; gap: 20px;"),
       class = "d-flex justify-content-between align-items-center",
-      # refresh button 
+      # refresh button
       actionButton(
-        inputId = ns("btn_rerun"), 
+        inputId = ns("btn_rerun"),
         "Re-run",
         icon = icon("rotate"),
         class = "btn-primary"
-      )    
+      )
     ),
     layout_columns(
       col_widths = c(4, 4, 4),
@@ -30,7 +30,6 @@ ui_module_sim_param_usr_input <- function(id, icon, title = "") {
           inputId = ns("n_between_a"),
           "N Clusters A", 5, min = 1
         ),
-        
         br(),
         br(),
         div(
@@ -38,7 +37,7 @@ ui_module_sim_param_usr_input <- function(id, icon, title = "") {
           textOutput(ns("true_effect"), inline = TRUE)
         )
       ),
-      
+
       # Column 2
       div(
         sliderInput(
@@ -76,7 +75,7 @@ ui_module_lme_estimates <- function(id, icon = "", title = "") {
   card(
     card_header(
       div(icon, span(title), style = "display: flex; align-items: center; gap: 20px;"),
-      ),
+    ),
     layout_columns(
       value_box(
         title = "Mean effect",
@@ -131,7 +130,8 @@ ui_module_show_plot_sim_data <- function(id, icon = "", title = "") {
   )
 }
 
-ui_module_show_forest_plot <- function(id, icon= "", title = "") {
+
+ui_module_show_forest_plot <- function(id, icon = "", title = "") {
   ns <- NS(id)
   card(
     card_header(
@@ -139,24 +139,10 @@ ui_module_show_forest_plot <- function(id, icon= "", title = "") {
     ),
     card_body(
       plotOutput(
-        outputId = ns("forest_plot"), 
+        outputId = ns("forest_plot"),
         height = "200px"
       ),
       padding = 0
     )
   )
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-

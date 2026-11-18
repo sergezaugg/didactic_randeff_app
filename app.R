@@ -27,15 +27,15 @@ ui <- page_navbar(
     "Simulate",
     layout_columns(
       col_widths = c(4, 4, 4),
-      ui_module_sim_param_usr_input(id = "pg01", icon= "❶", title = "Simulation parameters"),
-      ui_module_lme_estimates(id = "pg01a", icon= "❷", title = "LME estimates (accounts for clusters)"),
-      ui_module_lme_estimates(id = "pg01b", icon= "❸", title = "SLM estimates (! wrong because ignores clusters !)"),
+      ui_module_sim_param_usr_input(id = "pg01", icon = "❶", title = "Simulation parameters"),
+      ui_module_lme_estimates(id = "pg01a", icon = "❷", title = "LME estimates (accounts for clusters)"),
+      ui_module_lme_estimates(id = "pg01b", icon = "❸", title = "SLM estimates (! wrong because ignores clusters !)"),
     ),
     layout_columns(
       col_widths = c(4, 4, 4),
-      ui_quick_guide(icon = "❹" , title = "Quick guide"),
-      ui_module_show_plot_sim_data(id = "drk", icon= "❺", title = "Simulated data"),
-      ui_module_show_forest_plot(id = "drk", icon= "❻", title = "Compare CIs to H0: effect = 0"),
+      ui_quick_guide(icon = "❹", title = "Quick guide"),
+      ui_module_show_plot_sim_data(id = "drk", icon = "❺", title = "Simulated data"),
+      ui_module_show_forest_plot(id = "drk", icon = "❻", title = "Compare CIs to H0: effect = 0"),
     )
   ),
   # Page 2
