@@ -13,6 +13,13 @@ server_module_get_true_effect <- function(id) {
 }
 
 
+server_module_get_true_effect_num <- function(id) {
+  moduleServer(id, function(input, output, session) {
+    reactive({input$mu_b - input$mu_a})
+  })
+}
+
+
 server_module_gen_data <- function(id) {
   moduleServer(id, function(input, output, session) {
    reactive({

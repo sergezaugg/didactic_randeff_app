@@ -144,3 +144,46 @@ plot_hierarchical_data <- function(dat, dark_mode = FALSE) {
       )
     )
 }
+
+
+
+
+
+
+make_forest_plot <- function(lm_obj, lme_obj, true_effect){  
+  
+  plot_df <- bind_rows(
+    lm_obj()$df_fixed %>% mutate(Model = "LM"),
+    lme_obj()$df_fixed %>% mutate(Model = "LME")
+  ) %>%
+    filter(Term == "groupB")
+  
+  ggplot(plot_df, aes(x = Estimate, y = Model, color = Model)) +
+    geom_vline(xintercept = true_effect, linetype = "dashed", color = "#ff7700") +
+    geom_errorbarh(
+      aes(xmin = ci_lower, xmax = ci_upper),
+      height = 0.15,
+      linewidth = 0.8
+    ) +
+    geom_point(size = 3) +
+    labs(
+      x = "Estimated effect (95% CI)",
+      y = NULL,
+      title = "Estimated group effect: LM vs LME"
+    ) +
+    theme_minimal() +
+    theme(legend.position = "none")
+  
+}
+
+
+
+
+
+
+
+
+
+
+
+

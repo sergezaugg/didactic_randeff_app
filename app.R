@@ -30,13 +30,17 @@ ui <- page_navbar(
       # ....
       ui_module_sim_param_usr_input(id = "pg01", title = "Simulation parameters"),
       ui_module_lme_estimates(id = "pg01a", title = "LME estimates (accounts for clusters)"),
-      card(card_header("Quick guide ..."))
+      card(
+        card_header("Compare CIs"),
+        plotOutput("forest_plot", height = "250px")
+      )
     ),
+    
     layout_columns(
       col_widths = c(4, 4, 4),
       ui_module_show_plot_sim_data(id = "drk", title = "Simulated data"),
       ui_module_lme_estimates(id = "pg01b", title = "LM estimates (! wrong because ignores clusters !)"),
-      card(card_header("VIZ ..."))
+      card(card_header("Quick guide ..."))
     )
   ),
 
@@ -64,6 +68,20 @@ server <- function(input, output, session) {
   # fit simple lm
   slm_obj <- server_module_fit_lm_mod(df = dat) # not using input or output
   server_module_prepare_lme_outputs(id = "pg01b", lme_obj = slm_obj)
+  
+  
+  
+  
+  # output$forest_plot <- make_forest_plot(lm_obj, lme_obj)
+  true_effect_num <- server_module_get_true_effect_num(id = "pg01")
+  
+  output$forest_plot <- renderPlot({
+    make_forest_plot(lm_obj = slm_obj, lme_obj = lme_obj, true_effect = true_effect_num())
+  })
+  
+  
+  
+  
 }
 
 
