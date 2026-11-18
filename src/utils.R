@@ -150,29 +150,65 @@ plot_hierarchical_data <- function(dat, dark_mode = FALSE) {
 
 
 
-make_forest_plot <- function(lm_obj, lme_obj, true_effect){  
+make_forest_plot <- function(lm_obj, lme_obj, true_effect, dark_mode = FALSE){  
   
   plot_df <- bind_rows(
-    lm_obj()$df_fixed %>% mutate(Model = "LM"),
-    lme_obj()$df_fixed %>% mutate(Model = "LME")
+    lm_obj$df_fixed %>% mutate(Model = "1_LM"),
+    lme_obj$df_fixed %>% mutate(Model = "0_LME")
   ) %>%
     filter(Term == "groupB")
   
-  ggplot(plot_df, aes(x = Estimate, y = Model, color = Model)) +
-    geom_vline(xintercept = true_effect, linetype = "dashed", color = "#ff7700") +
-    geom_errorbarh(
-      aes(xmin = ci_lower, xmax = ci_upper),
-      height = 0.15,
-      linewidth = 0.8
+  
+  bg <- if (dark_mode) "#222222" else "white"
+  fg <- if (dark_mode) "#E0E0E0" else "#222222"
+  border <- if (dark_mode) "#777777" else "black"
+  line_col <- if (dark_mode) "#3399ff" else "blue"
+  clust_col <- if (dark_mode) "#3399ff" else "blue"
+  
+
+  ggplot(plot_df, aes(x = Model, y = Estimate)) +
+    geom_hline(yintercept = 0.0, linetype = "dashed", color = "#000000") +
+    geom_errorbar(
+      aes(ymin = ci_lower, ymax = ci_upper),
+      width = 0.15,
+      linewidth = 0.8,
+      colour = line_col
     ) +
-    geom_point(size = 3) +
+    geom_point(size = 3, colour = line_col) +
     labs(
-      x = "Estimated effect (95% CI)",
-      y = NULL,
+      y = "Estimated effect (95% CI)",
+      x = NULL,
       title = "Estimated group effect: LM vs LME"
     ) +
-    theme_minimal() +
-    theme(legend.position = "none")
+    # theme_minimal() +
+    theme(legend.position = "none") +
+    scale_x_discrete(
+      labels = c(
+        "0_LME" = "LME",
+        "1_LM"  = "SLM"
+      )
+    ) +
+    theme_classic() +
+    theme(
+      text = element_text(colour = fg),
+      axis.text = element_text(colour = fg),
+      axis.title = element_text(colour = fg),
+      strip.text = element_text(colour = fg),
+      panel.background = element_rect(fill = bg),
+      plot.background = element_rect(fill = bg),
+      panel.border = element_rect(
+        colour = border,
+        fill = NA,
+        linewidth = 0.8
+      ),
+      axis.line = element_line(colour = fg)
+    ) +
+    theme(
+      strip.background = element_rect(
+        fill = bg,
+        colour = border
+      ),
+    )
   
 }
 

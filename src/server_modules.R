@@ -44,13 +44,40 @@ server_module_gen_data <- function(id) {
 server_module_render_sim_data_plot <- function(id, df) {
   moduleServer(id, function(input, output, session) {
     plot_resu <- reactive({
-      plot_hierarchical_data(dat = df(), dark_mode = identical(input$dark_mode, "dark"))
+      plot_hierarchical_data(
+        dat = df(), 
+        dark_mode = identical(input$dark_mode, "dark")
+        )
     })
     output$plot_data <- renderPlot({
       plot_resu()
     })
   })
 }
+
+
+
+server_module_make_forest_plot <- function(id, lm_obj, lme_obj) {
+  moduleServer(id, function(input, output, session) {
+    plot_resu2 <- reactive({
+      make_forest_plot(
+        lm_obj = lm_obj(), 
+        lme_obj = lme_obj(), 
+        true_effect = 99, # true_effect_num(),
+        dark_mode = identical(input$dark_mode, "dark")
+        )
+    })
+    output$forest_plot <- renderPlot({plot_resu2()})
+  })
+}
+
+
+
+
+
+
+
+
 
 
 server_module_fit_re_mod <- function(df) {
