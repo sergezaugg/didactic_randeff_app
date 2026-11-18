@@ -27,6 +27,20 @@ ptext <- list(
     The simulated data are then analysed using both a linear mixed-effects model (LMM) and a 
     simple linear model (SLM). The results are compared in terms of estimated group differences, 
     p-values, and confidence intervals.
-    "
+    ",
+  
+  quick_guide_tx_1 = "Panel 1: Set true values from which to simulate datasets",
+  quick_guide_tx_2 = "Panel 5: See realization of dataset (RE-RUN to simulate new)",
+  quick_guide_tx_3 = "Panel 2 & 3: See effect etimates (95%-CIs) from LME & SLM",
+  quick_guide_tx_4 = "Panel 6: Visually compare etimates (95%-CIs) to null hypothesis",  
+  
+  quick_guide_tx_5 = "Initial scenario has groups A and B with same mean, so the true effect is zero. 
+  Under this scenario, a well-calibrated statistical model should rarely* produce 
+  a p-value below 0.05 or a 95%-CI entirely above or below zero.
+  * Approximately 5 out of every 100 simulations.
+  
+  "   
+    
+  
 )
 

@@ -1,9 +1,28 @@
 # ---------------------------
-# Description : page 2
+# Description : pages with static contents
 # Author : Serge Zaugg
 # ---------------------------
 
-# second page
+ui_quick_guide <- function(icon, title){ 
+  card(
+    # card_header(title),
+    card_header(
+      div(icon, span(title), style = "display: flex; align-items: center; gap: 20px;")
+    ),
+    
+    div(
+      lapply(1:4, function(i) {
+        div(
+          ptext[[paste0("quick_guide_tx_", i)]],
+          style = "margin-bottom: 5px; line-height: 1.3;"
+        )
+      })
+    ),
+    tags$hr(style = "margin-top: 2px; margin-bottom: 2px;"),
+    p(ptext$quick_guide_tx_5)
+  ) 
+}
+
 
 ui_about_page <- function(){ 
   

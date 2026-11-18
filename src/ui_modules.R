@@ -4,12 +4,11 @@
 # ---------------------------
 
 
-ui_module_sim_param_usr_input <- function(id, title = "") {
+ui_module_sim_param_usr_input <- function(id, icon, title = "") {
   ns <- NS(id)
-
   card(
     card_header(
-      title,
+      div(icon, span(title), style = "display: flex; align-items: center; gap: 20px;"),
       class = "d-flex justify-content-between align-items-center",
       # refresh button 
       actionButton(
@@ -25,7 +24,7 @@ ui_module_sim_param_usr_input <- function(id, title = "") {
       div(
         sliderInput(
           inputId = ns("mu_a"),
-          "Mean A", min = 0, max = 5, value = 2, step = 0.2, ticks = FALSE
+          "Mean A", min = 0, max = 5, value = 3, step = 0.2, ticks = FALSE
         ),
         numericInput(
           inputId = ns("n_between_a"),
@@ -59,11 +58,11 @@ ui_module_sim_param_usr_input <- function(id, title = "") {
         ),
         numericInput(
           inputId = ns("sd_within"),
-          "SD residual", 0.5, min = 0.1, max = 2, step = 0.1
+          "SD residual", 0.2, min = 0.1, max = 2, step = 0.1
         ),
         numericInput(
           inputId = ns("n_within"),
-          "N per cluster", 5, min = 2, max = 20
+          "N per cluster", 10, min = 2, max = 20
         )
       )
     )
@@ -71,11 +70,13 @@ ui_module_sim_param_usr_input <- function(id, title = "") {
 }
 
 
-ui_module_lme_estimates <- function(id, title = "aa") {
+ui_module_lme_estimates <- function(id, icon = "", title = "") {
   ns <- NS(id)
 
   card(
-    card_header(title),
+    card_header(
+      div(icon, span(title), style = "display: flex; align-items: center; gap: 20px;"),
+      ),
     layout_columns(
       value_box(
         title = "Mean effect",
@@ -114,14 +115,48 @@ ui_module_lme_estimates <- function(id, title = "aa") {
 }
 
 
-ui_module_show_plot_sim_data <- function(id, title = "aa") {
+ui_module_show_plot_sim_data <- function(id, icon = "", title = "") {
   ns <- NS(id)
-
   card(
-    card_header(title),
-    plotOutput(
-      outputId = ns("plot_data"),
-      height = "300px"
+    card_header(
+      div(icon, span(title), style = "display: flex; align-items: center; gap: 20px;"),
+    ),
+    card_body(
+      plotOutput(
+        outputId = ns("plot_data"),
+        height = "200px"
+      ),
+      padding = 0
     )
   )
 }
+
+ui_module_show_forest_plot <- function(id, icon= "", title = "") {
+  ns <- NS(id)
+  card(
+    card_header(
+      div(icon, span(title), style = "display: flex; align-items: center; gap: 20px;"),
+    ),
+    card_body(
+      plotOutput(
+        outputId = ns("forest_plot"), 
+        height = "200px"
+      ),
+      padding = 0
+    )
+  )
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
