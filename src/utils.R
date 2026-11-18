@@ -167,7 +167,7 @@ make_forest_plot <- function(lm_obj, lme_obj, true_effect, dark_mode = FALSE){
   
 
   ggplot(plot_df, aes(x = Model, y = Estimate)) +
-    geom_hline(yintercept = 0.0, linetype = "dashed", color = "#000000") +
+    geom_hline(yintercept = 0.0, linetype = "dashed", color = line_col) +
     geom_errorbar(
       aes(ymin = ci_lower, ymax = ci_upper),
       width = 0.15,
