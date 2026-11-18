@@ -1,9 +1,7 @@
 # ---------------------------
-# Description : page 2
+# Description : pages with static contents
 # Author : Serge Zaugg
 # ---------------------------
-
-# second page
 
 ui_quick_guide <- function(icon, title){ 
   card(

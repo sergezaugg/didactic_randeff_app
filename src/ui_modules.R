@@ -121,9 +121,12 @@ ui_module_show_plot_sim_data <- function(id, icon = "", title = "") {
     card_header(
       div(icon, span(title), style = "display: flex; align-items: center; gap: 20px;"),
     ),
-    plotOutput(
-      outputId = ns("plot_data"),
-      height = "300px"
+    card_body(
+      plotOutput(
+        outputId = ns("plot_data"),
+        height = "200px"
+      ),
+      padding = 0
     )
   )
 }
@@ -134,9 +137,13 @@ ui_module_show_forest_plot <- function(id, icon= "", title = "") {
     card_header(
       div(icon, span(title), style = "display: flex; align-items: center; gap: 20px;"),
     ),
-    plotOutput(
-      outputId = ns("forest_plot"), 
-      height = "250px")
+    card_body(
+      plotOutput(
+        outputId = ns("forest_plot"), 
+        height = "200px"
+      ),
+      padding = 0
+    )
   )
 }
 

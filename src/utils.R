@@ -92,9 +92,9 @@ plot_hierarchical_data <- function(dat, dark_mode = FALSE) {
     dplyr::mutate(x_pos = as.numeric(factor(cluster))) |>
     dplyr::ungroup()
 
-  bg <- if (dark_mode) "#222222" else "white"
-  fg <- if (dark_mode) "#E0E0E0" else "#222222"
-  border <- if (dark_mode) "#777777" else "black"
+  bg <- if (dark_mode) "#000000" else "white"
+  fg <- if (dark_mode) "#E0E0E0" else "#000000"
+  border <- if (dark_mode) "#777777" else "#000000"
   point_col <- if (dark_mode) "#E0E0E0" else "#404040"
   clust_col <- if (dark_mode) "cyan" else "blue"
 
@@ -117,31 +117,19 @@ plot_hierarchical_data <- function(dat, dark_mode = FALSE) {
       linewidth = 1
     ) +
     facet_wrap(~group, scales = "free_x") +
-    labs(x = "Cluster", y = "Outcome", title = "") +
+    labs(x = "Cluster", y = "Outcome", title = NULL) +
     theme_classic() +
     theme(
+      plot.margin = margin(20, 20, 20, 20),
       text = element_text(colour = fg),
-      axis.text = element_text(colour = fg),
-      axis.title = element_text(colour = fg),
-      strip.text = element_text(colour = fg),
+      axis.text = element_text(colour = fg, size = 16),
+      axis.title = element_text(colour = fg, size = 16),
       panel.background = element_rect(fill = bg),
       plot.background = element_rect(fill = bg),
-      panel.border = element_rect(
-        colour = border,
-        fill = NA,
-        linewidth = 0.8
-      ),
-      axis.line = element_line(colour = fg)
-    ) +
-    theme(
-      strip.background = element_rect(
-        fill = bg,
-        colour = border
-      ),
-      strip.text = element_text(
-        colour = fg,
-        face = "bold"
-      )
+      panel.border = element_rect(colour = border,fill = NA,linewidth = 1.0),
+      strip.background = element_rect(fill = bg,colour = border),
+      strip.text = element_text(colour = fg, size = 16, face = "bold")
+
     )
 }
 
@@ -159,9 +147,9 @@ make_forest_plot <- function(lm_obj, lme_obj, true_effect, dark_mode = FALSE){
     filter(Term == "groupB")
   
   
-  bg <- if (dark_mode) "#222222" else "white"
-  fg <- if (dark_mode) "#E0E0E0" else "#222222"
-  border <- if (dark_mode) "#777777" else "black"
+  bg <- if (dark_mode) "#000000" else "white"
+  fg <- if (dark_mode) "#E0E0E0" else "#000000"
+  border <- if (dark_mode) "#777777" else "#000000"
   line_col <- if (dark_mode) "#3399ff" else "blue"
   clust_col <- if (dark_mode) "#3399ff" else "blue"
   
@@ -178,9 +166,8 @@ make_forest_plot <- function(lm_obj, lme_obj, true_effect, dark_mode = FALSE){
     labs(
       y = "Estimated effect (95% CI)",
       x = NULL,
-      title = "Estimated group effect: LM vs LME"
+      title = NULL,
     ) +
-    # theme_minimal() +
     theme(legend.position = "none") +
     scale_x_discrete(
       labels = c(
@@ -190,24 +177,15 @@ make_forest_plot <- function(lm_obj, lme_obj, true_effect, dark_mode = FALSE){
     ) +
     theme_classic() +
     theme(
+      plot.margin = margin(20, 20, 20, 20),
       text = element_text(colour = fg),
-      axis.text = element_text(colour = fg),
-      axis.title = element_text(colour = fg),
-      strip.text = element_text(colour = fg),
+      axis.text = element_text(colour = fg, size = 16),
+      axis.title = element_text(colour = fg, size = 16),
       panel.background = element_rect(fill = bg),
       plot.background = element_rect(fill = bg),
-      panel.border = element_rect(
-        colour = border,
-        fill = NA,
-        linewidth = 0.8
-      ),
-      axis.line = element_line(colour = fg)
-    ) +
-    theme(
-      strip.background = element_rect(
-        fill = bg,
-        colour = border
-      ),
+      panel.border = element_rect(colour = border,fill = NA,linewidth = 1.0),
+      strip.background = element_rect(fill = bg,colour = border),
+      strip.text = element_text(colour = fg,face = "bold", size = 16)
     )
   
 }

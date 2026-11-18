@@ -38,13 +38,11 @@ ui <- page_navbar(
       ui_module_show_forest_plot(id = "drk", icon= "❻", title = "Compare CIs to H0: effect = 0"),
     )
   ),
-
   # Page 2
   nav_panel(
     "About",
     ui_about_page()
   ),
-
   # elements right of navbar
   nav_spacer(),
   nav_item(app_custom_theme_title("Theme")),
@@ -54,7 +52,6 @@ ui <- page_navbar(
 
 server <- function(input, output, session) {
   true_effect <- server_module_get_true_effect(id = "pg01")
-  # ....
   dat <- server_module_gen_data(id = "pg01")
   server_module_render_sim_data_plot(id = "drk", df = dat)
   # fit lme model
@@ -66,7 +63,6 @@ server <- function(input, output, session) {
   # make_forest_plot
   true_effect_num <- server_module_get_true_effect_num(id = "pg01")
   server_module_make_forest_plot(id = "drk", lm_obj = slm_obj, lme_obj = lme_obj)
-  
 }
 
 

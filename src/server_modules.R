@@ -22,7 +22,7 @@ server_module_get_true_effect_num <- function(id) {
 
 server_module_gen_data <- function(id) {
   moduleServer(id, function(input, output, session) {
-   reactive({
+   dat_val <- reactive({
       par <- list(
         mu_a = input$mu_a,
         mu_b = input$mu_b,
@@ -31,12 +31,14 @@ server_module_gen_data <- function(id) {
         n_wi = input$n_within,
         sd_be = input$sd_between,
         sd_wi = input$sd_within
-      )
+      ) 
       # trigger re-simulate if button clicked
       input$btn_rerun
       # perform re-simulate
       generate_hierarchical_data(par)
-    }) 
+    }) %>%
+      debounce(800)
+    return(dat_val)
   })
 }
 
