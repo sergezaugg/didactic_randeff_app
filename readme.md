@@ -1,7 +1,12 @@
 # Random Effects Playground
 
 ### Features
-tbd
+This didactic Shiny app provides an interactive introduction to clustered data and linear mixed-effects models (LMMs), 
+helping users understand how clustering influences statistical analysis. Users can simulate clustered 
+data by adjusting between-cluster variance, residual variance, and the true difference between groups. 
+The simulated data are analysed using both LMMs and simple linear models (SLMs), allowing users 
+to compare estimated effects, p-values, and confidence intervals. The comparison illustrates why 
+accounting for clustering is essential for valid statistical inference.
 
 ### Dependencies
 - R 4.5.1
@@ -53,11 +58,23 @@ Call Rscript with repo path as argument to runApp(), below replace ... by your p
 .\Rscript --no-init-file -e "shiny::runApp(appDir = '.../didactic_randeff_app', launch.browser = TRUE)"
 ```
 
-
 ### Project Structure
-
 ```text
-
+didactic_randeff_app/
+│
+├── app.R                    # Main Shiny app entry poinz
+├── src/                     # Shared functions, ui and server components
+├── contents/                # Static contents and text
+├── styles/                  # CSS and visual styling
+│
+├── sandbox/                 # Experimental code and development
+├── renv/                    # Project-specific R package library
+├── .Rprofile                # Project startup configuration
+├── .gitignore               # Git exclusions
+├── renv.lock                # Reproducible package dependencies
+├── didactic_randeff_app.Rproj
+├── LICENSE
+└── README.md
 ```
 
 ### Credits
