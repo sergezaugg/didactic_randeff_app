@@ -19,7 +19,7 @@ ui <- page_navbar(
   title = "Random Effects Playground",
   padding = c(25, 5, 50, 5),
   header = includeCSS("styles/styles.css"),
-  app_custom_footer(text = "v0.9.3-β - © 2026 Serge Zaugg"),
+  app_custom_footer(text = "v0.9.4-β - © 2026 Serge Zaugg"),
   theme = bs_theme(version = 5, bootswatch = "sandstone", bg = "#F5F1E9", fg = "#000000"),
 
   # Page 1
@@ -27,15 +27,15 @@ ui <- page_navbar(
     "Simulate",
     layout_columns(
       col_widths = c(4, 4, 4),
-      ui_module_sim_param_usr_input(id = "pg01", icon= "❶", title = "Simulation parameters"),
-      ui_module_lme_estimates(id = "pg01a", icon= "❷", title = "LME estimates (accounts for clusters)"),
-      ui_module_lme_estimates(id = "pg01b", icon= "❸", title = "SLM estimates (! wrong because ignores clusters !)"),
+      ui_module_sim_param_usr_input(id = "pg01", icon = "❶", title = "Simulation parameters"),
+      ui_module_lme_estimates(id = "pg01a", icon = "❷", title = "LMM estimates (accounts for clusters)"),
+      ui_module_lme_estimates(id = "pg01b", icon = "❸", title = "SLM estimates (generally wrong because ignores clusters!)"),
     ),
     layout_columns(
       col_widths = c(4, 4, 4),
-      ui_quick_guide(icon = "❹" , title = "Quick guide"),
-      ui_module_show_plot_sim_data(id = "drk", icon= "❺", title = "Simulated data"),
-      ui_module_show_forest_plot(id = "drk", icon= "❻", title = "Compare CIs to H0: effect = 0"),
+      ui_quick_guide(icon = "❹", title = "Quick guide"),
+      ui_module_show_plot_sim_data(id = "drk", icon = "❺", title = "Simulated data"),
+      ui_module_show_forest_plot(id = "drk", icon = "❻", title = "Compare CIs to H0: effect = 0"),
     )
   ),
   # Page 2
