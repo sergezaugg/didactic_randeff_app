@@ -8,6 +8,9 @@ The simulated data are analysed using both LMMs and simple linear models (SLMs),
 to compare estimated effects, p-values, and confidence intervals. The comparison illustrates why 
 accounting for clustering is essential for valid statistical inference.
 
+### Preview
+<img src="contents/app_screenshot.png" width="500">
+
 ### Dependencies
 - R 4.5.1
 - tidyverse · shiny · bslib · lme4
