@@ -96,7 +96,7 @@ plot_hierarchical_data <- function(dat, dark_mode = FALSE) {
   fg <- if (dark_mode) "#E0E0E0" else "#000000"
   border <- if (dark_mode) "#777777" else "#000000"
   point_col <- if (dark_mode) "#E0E0E0" else "#404040"
-  clust_col <- if (dark_mode) "cyan" else "blue"
+  clust_col <- if (dark_mode) "cyan" else "#3399ff"
 
   ggplot(dat, aes(x = factor(cluster), y = y)) +
     geom_jitter(width = 0.1, height = 0, colour = point_col) +
@@ -143,8 +143,8 @@ make_forest_plot <- function(lm_obj, lme_obj, true_effect, dark_mode = FALSE) {
   bg <- if (dark_mode) "#000000" else "white"
   fg <- if (dark_mode) "#E0E0E0" else "#000000"
   border <- if (dark_mode) "#777777" else "#000000"
-  line_col <- if (dark_mode) "#3399ff" else "blue"
-  clust_col <- if (dark_mode) "#3399ff" else "blue"
+  line_col <- if (dark_mode) "cyan" else "#3399ff"
+  clust_col <- if (dark_mode) "cyan" else "#3399ff"
 
   ggplot(plot_df, aes(x = Model, y = Estimate)) +
     geom_hline(yintercept = 0.0, linetype = "dashed", color = line_col) +
