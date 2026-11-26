@@ -1,6 +1,6 @@
-/* =====================================================
-   CSS styles 
-   ===================================================== */
+/* =========================
+CSS styles 
+========================= */
 
 /* Main container */
 .container-fluid {
@@ -29,9 +29,121 @@
 }
 
 
-/* Center value box content */
-.center-value .value-box-showcase {text-align: center;}
-.center-value .value-box-value { font-size: 16px;}
-.center-value .value-box-title {  font-size: 16px;}
 
 
+/* Light mode – warm cream */
+:root {
+  --vb-bg: #f7f0dc;
+  --vb-text: #302d27;
+  --vb-title: #85745c;
+  --vb-border: #85745c;
+}
+
+/* Dark mode – warm charcoal / brown */
+[data-bs-theme="dark"] {
+  --vb-bg: #302d27;
+  --vb-text: #f7f0dc;
+  --vb-title: #c0ad8d;
+  --vb-border: #c0ad8d;
+}
+
+/*---------------
+Value boxes 
+----------------*/
+
+.custom-value-box {
+  background-color: var(--vb-bg) !important;
+  color: var(--vb-text) !important;
+  border: 1px solid var(--vb-border);
+  text-align: center;
+  font-size: 18px;
+}
+
+.custom-value-box .value-box-title {
+  color: var(--vb-title) !important;
+  font-size: 20px;
+}
+
+.custom-value-box .value-box-value {
+  color: var(--vb-text) !important;
+  font-size: 18px;
+}
+
+
+/*---------------
+btn-primary
+----------------*/
+
+/* Primary buttons – adapt to light/dark mode */
+.btn-primary {
+  background-color: var(--vb-bg) !important;
+  color: var(--vb-text) !important;
+  border: 2px solid var(--vb-border) !important;
+}
+
+/* Hover */
+.btn-primary:hover {
+  background-color: var(--vb-border) !important;
+  color: var(--vb-text) !important;
+  border-color: var(--vb-title) !important;
+}
+
+/* Focus */
+.btn-primary:focus {
+  box-shadow: 0 0 0 0.2rem rgba(180, 150, 90, 0.2) !important;
+}
+
+/* Active / pressed */
+.btn-primary:active,
+.btn-primary.active {
+  background-color: var(--vb-border) !important;
+  color: var(--vb-text) !important;
+}
+
+
+/*---------------
+SLIDERS – 
+----------------*/   
+  
+/* Sliders – Sandstone light/dark */
+
+.irs--shiny .irs-line {
+  background: var(--vb-border) !important;
+}
+
+.irs--shiny .irs-bar {
+  background: var(--vb-title) !important;
+}
+
+.irs--shiny .irs-handle {
+  background: var(--vb-bg) !important;
+  border: 2px solid var(--vb-title) !important;
+}
+
+.irs--shiny .irs-single,
+.irs--shiny .irs-from,
+.irs--shiny .irs-to {
+  background: var(--vb-bg) !important;
+  color: var(--vb-text) !important;
+  border: 1px solid var(--vb-border) !important;
+}
+
+.irs--shiny .irs-single::before,
+.irs--shiny .irs-from::before,
+.irs--shiny .irs-to::before {
+  border-top-color: var(--vb-border) !important;
+}
+
+.irs--shiny .irs-min,
+.irs--shiny .irs-max {
+  color: var(--vb-text) !important;
+}
+
+.irs--shiny .irs-grid-text {
+  color: var(--vb-title) !important;
+}
+ 
+   
+   
+   
+   

@@ -20,3 +20,7 @@
 # styler::style_file("src/server_modules.R")
 # styler::style_file("src/ui_modules.R")
 
+
+
+col <- "#443b2e"
+

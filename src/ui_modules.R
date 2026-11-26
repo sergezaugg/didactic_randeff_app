@@ -80,12 +80,14 @@ ui_module_lme_estimates <- function(id, icon = "", title = "") {
       value_box(
         title = "Mean effect",
         value = uiOutput(outputId = ns("effect_mean")),
-        height = "60px", theme = "primary", class = "center-value"
+        height = "60px", 
+        theme = "secondary",
+        class = "custom-value-box"
       ),
       value_box(
         title = "SD between",
         value = uiOutput(outputId = ns("sd_between")),
-        height = "60px", theme = "primary", class = "center-value"
+        height = "60px", theme = "primary", class = "custom-value-box"
       ),
       col_widths = c(6, 6)
     ),
@@ -93,12 +95,12 @@ ui_module_lme_estimates <- function(id, icon = "", title = "") {
       value_box(
         title = "95% CI",
         value = uiOutput(outputId = ns("effect_std")),
-        height = "60px", theme = "primary", class = "center-value"
+        height = "60px", theme = "primary", class = "custom-value-box"
       ),
       value_box(
         title = "SD residuals",
         value = uiOutput(outputId = ns("sd_resid")),
-        height = "60px", theme = "primary", class = "center-value"
+        height = "60px", theme = "primary", class = "custom-value-box"
       ),
       col_widths = c(6, 6)
     ),
@@ -106,7 +108,7 @@ ui_module_lme_estimates <- function(id, icon = "", title = "") {
       value_box(
         title = "P-value effect",
         value = uiOutput(outputId = ns("effect_pval")),
-        height = "60px", theme = "primary", class = "center-value"
+        height = "60px", theme = "primary", class = "custom-value-box"
       ),
       col_widths = c(6, 6)
     )

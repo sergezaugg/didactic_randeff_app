@@ -19,7 +19,7 @@ ui <- page_navbar(
   title = "Random Effects Playground",
   padding = c(25, 5, 50, 5),
   header = includeCSS("styles/styles.css"),
-  app_custom_footer(text = "v0.9.4-β - © 2026 Serge Zaugg"),
+  app_custom_footer(text = "v0.9.5-β - © 2026 Serge Zaugg"),
   theme = bs_theme(version = 5, bootswatch = "sandstone", bg = "#F5F1E9", fg = "#000000"),
 
   # Page 1
