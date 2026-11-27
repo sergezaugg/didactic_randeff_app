@@ -10,6 +10,8 @@
 # renv::restore()  # Restore packages from renv.lock
 # ---------------------------
 
+# "flatly" "zephyr" "cosmo" "litera" "minty" "sandstone"
+
 # install.packages("styler")
 # styler::style_file("app.R")
 
