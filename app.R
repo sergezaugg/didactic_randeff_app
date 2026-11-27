@@ -1,7 +1,6 @@
 # ---------------------------
 # Description : apps main entry point
 # Author : Serge Zaugg
-# "flatly" "zephyr" "cosmo" "litera" "minty" "sandstone"
 # ---------------------------
 
 library(shiny)
@@ -15,11 +14,14 @@ source("src/server_modules.R")
 source("src/ui_static_pages.R")
 source("contents/text_for_pages.R")
 
+# Tell shiny where to find contents
+addResourcePath("contents", "contents")
+
 ui <- page_navbar(
-  title = "Random Effects Playground",
+  title = app_custom_title(text = "Random Effects Playground"),
   padding = c(25, 5, 50, 5),
   header = includeCSS("styles/styles.css"),
-  app_custom_footer(text = "v0.9.5-β - © 2026 Serge Zaugg"),
+  app_custom_footer(text = "v0.9.6-β - © 2026 Serge Zaugg"),
   theme = bs_theme(version = 5, bootswatch = "sandstone", bg = "#F5F1E9", fg = "#000000"),
 
   # Page 1
